@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Invitación al Cumpleaños de Renata!</title>
+    <link href="
+https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap
+" rel="stylesheet">
+    <style>
+        /* Estilos base y tema Frozen */
+        :root {
+            --azul-frozen: #add8e6;
+            --plata: #c0c0c0;
+            --rosa-brillante: #ffb6c1;
+            --azul-oscuro: #004a99;
+            --fantasía-fuente: 'Pacifico', cursive;
+            --texto-fuente: 'Quicksand', sans-serif;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* Azul cielo muy claro */
+            background-image: 
+                radial-gradient(var(--azul-frozen) 1px, transparent 1px),
+                radial-gradient(var(--azul-frozen) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            font-family: var(--texto-fuente);
+            color: var(--azul-oscuro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 4px solid var(--azul-frozen);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Brillo de plata en el borde */
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -5px; bottom: -5px; left: -5px; right: -5px;
+            border-radius: 25px;
+            border: 5px solid transparent;
+            border-image: linear-gradient(to bottom right, var(--azul-frozen), var(--plata), var(--rosa-brillante)) 1;
+            z-index: -1;
+        }
+        /* Encabezados y Nombres */
+        h1 {
+            font-family: var(--fantasía-fuente);
+            color: var(--rosa-brillante);
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8), 3px 3px 0px var(--azul-frozen);
+        }
+        h2 {
+            font-weight: 700;
+            color: var(--azul-oscuro);
+            margin-top: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        /* Sección de Fotos (Galería simple) */
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+            margin-bottom: 25px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+        }
+        
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            object-fit: cover;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            border: 3px solid var(--azul-frozen);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        /* Detalles del Evento */
+        .event-details {
+            background-color: var(--azul-frozen);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .event-details p { margin: 5px 0; }
+        .event-title { font-weight: 700; color: var(--azul-oscuro); }
+        .emphasis { color: var(--rosa-brillante); font-weight: bold; }
+        /* Frase especial: Piscina */
+        .piscina-phrase {
+            font-style: italic;
+            background-color: var(--rosa-brillante);
+            color: var(--azul-oscuro);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        /* Cuenta Regresiva */
+        #countdown-container {
+            margin-bottom: 25px;
+        }
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 0.9em;
+        }
+        .time-box {
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 2px solid var(--azul-frozen);
+            min-width: 60px;
+        }
+        .time-box span {
+            display: block;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--azul-oscuro);
+        }
+        /* Botones */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: 0.3s;
+            cursor: pointer;
+            width: 80%;
+            max-width: 280px;
+        }
+        /* Botón Mapa (Azul Frozen) */
+        .btn-map {
+            background-color: var(--azul-frozen);
+            color: white;
+        }
+        .btn-map:hover { background-color: #8cc6d9; }
+        /* Botón WhatsApp (Sutil Rosa) */
+        .btn-whatsapp {
+            background-color: white;
+            color: var(--rosa-brillante);
+            border: 2px solid var(--rosa-brillante);
+            font-size: 0.9em; /* Más sutil */
+        }
+        .btn-whatsapp:hover {
+            background-color: var(--rosa-brillante);
+            color: white;
+        }
+        /* Música (Reproductor visible pero discreto) */
+        .music-player {
+            margin-top: 30px;
+            opacity: 0.7;
+        }
+        
+        audio {
+            width: 100%;
+            height: 35px;
+            outline: none;
+        }
+        /* Adorno de copos de nieve */
+        .snowflake {
+            position: absolute;
+            color: var(--azul-frozen);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="snowflake" style="top: 10px; left: 10px; font-size: 2em;">&#10052;</div>
+        <div class="snowflake" style="bottom: 10px; right: 10px; font-size: 1.5em;">&#10052;</div>
+        <div class="snowflake" style="top: 50%; left: 80%; font-size: 1.8em;">&#10052;</div>
+        <h1>Renata Mailen</h1>
+        <h2>🎉 ¡Cumple 3 años! 🎉</h2>
+        
+        <p>Acompáñanos a una celebración mágica llena de alegría y diversión.</p>
+        <div class="gallery">
+            <img src="imagen1.jpg"
+" alt="Foto de Renata 1">
+            <img src="imagen2.jpg"
+" alt="Foto de Renata 2">
+            <img src="imagen3.jpg"
+" alt="Foto de Renata 3">
+        </div>
+        <div class="piscina-phrase">
+            💧 ¡Habrá piscina, así que trae tu traje de baño! 💧
+        </div>
+        <div class="event-details">
+            <p class="event-title">📅 ¿Cuándo?</p>
+            <p>Sábado <span class="emphasis">9 de mayo</span> | <span class="emphasis">11:30 am</span></p>
+            <p class="event-title">📍 ¿Dónde?</p>
+            <p>Ubicación del evento <br> (Quinta la providencia)</p>
+        </div>
+        <div id="countdown-container">
+            <p style="font-size: 0.9em; margin-bottom: 5px;">Tiempo para la magia:</p>
+            <div id="countdown">
+                <div class="time-box"><span id="days">00</span>Días</div>
+                <div class="time-box"><span id="hours">00</span>Hrs</div>
+                <div class="time-box"><span id="minutes">00</span>Min</div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <a href="
+https://maps.app.goo.gl/3z5QvTfH5BmRBDx77?g_st=ac
+" target="_blank" class="btn btn-map">
+                🌐 Ver en Google Maps
+            </a>
+            
+            <a href="
+https://wa.me/9672727381?text=¡Hola!
+ Confirmo la asistencia al cumpleaños de Renata." target="_blank" class="btn btn-whatsapp">
+                Confirma por WhatsApp
+            </a>
+        </div>
+        <div class="music-player">
+            <p style="font-size: 0.8em; color: var(--plata); margin-bottom: 5px;">Música para la fiesta (Dale play)</p>
+            <audio controls>
+                <source src="musicarenata.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+    <script>
+        // SCRIPT PARA LA CUENTA REGRESIVA
+        
+        // Define la fecha del cumpleaños: Año, Mes (0-11, mayo es 4), Día, Hora, Minuto, Segundo
+        const birthdayDate = new Date('2026-05-09T11:30:00').getTime(); 
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+            if (distance < 0) {
+                document.getElementById('countdown-container').innerHTML = "<h3>¡Es hoy! 🎉</h3>";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            // Asegura que siempre haya dos dígitos (ej. '09' en lugar de '9')
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        };
+        // Actualiza la cuenta cada segundo
+        updateCountdown(); 
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
